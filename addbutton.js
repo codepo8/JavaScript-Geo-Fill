@@ -9,6 +9,7 @@
         'city':'usercity',
         'latitude':'userlat',
         'longitude':'userlon',
+        'postcode':'userpostcode',
         'country':'usercountry'
       }
     );

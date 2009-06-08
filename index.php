@@ -48,7 +48,7 @@
     color:#fff;
   }
   #ft a{
-    color:#fc6;
+    color:#9cf;
   }
   html,body{
     background:#666;
@@ -57,31 +57,59 @@
     padding:.2em 0;
   }
   #bd{background:#fff;border:1em solid #fff;}
+#nav li{
+  list-style:none;
+}
+#nav li a {
+  background:#369;
+  color:#fff;
+  padding:.2em 1em;
+  display:block;
+  text-decoration:none;
+  -moz-border-radius:5px;
+  margin:.5em 0;
+  color:#fff;
+}
+#nav li a:hover {
+  background:#69c;
+}
   </style>
 </head>
 <body>
 <div id="doc" class="yui-t7">
   <div id="hd" role="banner"><h1>GeoFill - automatically filling form data with geo information</h1></div>
   <div id="bd" role="main">
-    <p>Wouldn't it be cool to be able to allow users to automatically fill parts of a form, especially the location part of addresses? Services like <a href="http://fireeagle.yahoo.net/">FireEagle</a> allow you to do that but it is not very likely that mainstream users will have signed up to them.</p>
-    <p>One thing we can do is recognise the user's IP number or allow the user to enter one thing and try to guess the rest for them. GeoFill is a JavaScript wrapper library that uses Yahoo Geo and GeoIP to do that for you. Try the following examples:</p>
-    
-    <h2>Examples</h2>
+       <div class="yui-gc">
+         <div class="yui-u first">
+           <p>Wouldn't it be cool to be able to allow users to automatically fill parts of a form, especially the location part of addresses? Services like <a href="http://fireeagle.yahoo.net/">FireEagle</a> allow you to do that but it is not very likely that mainstream users will have signed up to them.</p>
+           <p>One thing we can do is recognise the user's IP number or allow the user to enter one thing and try to guess the rest for them. GeoFill is a JavaScript wrapper library that uses Yahoo Geo and GeoIP to do that for you. Try the following examples:</p>
+           <h2>Examples</h2>
 
-    <ul id="demos">
-      <?php
-        $demos = array('suggestion'=>'Provide a location suggestion based on IP','searchbutton'=>'Provide a button to get data','postcode'=>'Lookup from postcode');
-        foreach(array_keys($demos) as $d){
-          if($_GET['demo']===$d){
-            echo '<li><strong>'.$demos[$d].'</strong></li>';
-          } else {
-            echo '<li><a href="index.php?demo='.$d.'">'.$demos[$d].'</a></li>';
-          }
-        }
-      
-      
-      ?>
-    </ul>
+           <ul id="demos">
+             <?php
+               $demos = array('suggestion'=>'Provide a location suggestion based on IP','searchbutton'=>'Provide a button to get data','postcode'=>'Lookup from postcode');
+               foreach(array_keys($demos) as $d){
+                 if($_GET['demo']===$d){
+                   echo '<li><strong>'.$demos[$d].'</strong></li>';
+                 } else {
+                   echo '<li><a href="index.php?demo='.$d.'">'.$demos[$d].'</a></li>';
+                 }
+               }
+
+
+             ?>
+           </ul>
+           
+         </div>
+         <div class="yui-u">
+            <ul id="nav">
+              <li><a href="http://www.wait-till-i.com/2009/06/07/adding-address-information-automatically-to-forms-with-geofill/">Comment on the blog</a></li>
+              <li><a href="http://github.com/codepo8/JavaScript-Geo-Fill/tree/master">GeoFill on GitHub</a></li>
+            </ul>
+          
+         </div>
+       </div>
+    
     <?php if(isset($_GET['demo'])){?>
        <div class="yui-gc">
          <div class="yui-u  first">

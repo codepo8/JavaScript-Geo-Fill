@@ -17,6 +17,7 @@
         but.onclick = function(){
           $('usercity').value = o.city;
           $('usercountry').value = o.country;
+          $('userpostcode').value = o.postcode;
           $('userlat').value = o.latitude;
           $('userlon').value = o.longitude;
           function $(id){

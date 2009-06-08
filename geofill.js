@@ -1,6 +1,6 @@
 /*
   GeoFill by Christian Heilmann
-  Version: 1.0
+  Version: 1.1
   Homepage: http://icant.co.uk/geofill
   Copyright (c) 2009, Christian Heilmann
   Code licensed under the BSD License:
@@ -9,9 +9,10 @@
 geofill = function(){
   var fieldstofill = null;
   var postcode = null;
+  var ipdata = null;
   function find(o){
     fieldstofill = o;
-    get('http://geoip.pidgets.com/?format=json&callback=geofill.set');
+    get('http://geoip.pidgets.com/?format=json&callback=geofill.getpc');
   }
   function lookup(pc){
     postcode = pc;
@@ -66,13 +67,24 @@ geofill = function(){
     s.setAttribute('src',url);
     document.getElementsByTagName('head')[0].appendChild(s);
   }
+  function getPostalfromIP(o){
+    ipdata = o;
+    // god I friggin love YQL
+    var url = 'http://query.yahooapis.com/v1/public/yql?q=select'+
+              '%20postal%20from%20geo.places%20where%20woeid%20in%20'+
+              '(select%20place.woeid%20from%20flickr.places%20where'+
+              '%20lat%3D%22'+o.latitude+'%22%20and%20lon%3D%22'+
+              o.longitude+'%22)&format=json&callback=geofill.set';
+    get(url);
+  }
+  
   function set(o){
     var filtered = {
-      city:o.city,
-      country:o.country_name,
-      postcode:o.postal_code,
-      latitude:o.latitude,
-      longitude:o.longitude
+      city:ipdata.city,
+      country:ipdata.country_name,
+      postcode:o.query.results.place.postal.content,
+      latitude:ipdata.latitude,
+      longitude:ipdata.longitude
     }
     for(var i in fieldstofill){
       var x = document.getElementById(fieldstofill[i]);
@@ -84,5 +96,11 @@ geofill = function(){
       fieldstofill.callback(filtered);
     }
   }
-  return {set:set,find:find,pc:setPostcode,lookup:lookup}
+  return {
+    set:set,
+    find:find,
+    pc:setPostcode,
+    lookup:lookup,
+    getpc:getPostalfromIP
+  }
 }();
