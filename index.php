@@ -6,74 +6,8 @@
   <title>GeoFill - automatically filling form data with geo information</title>
   <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
   <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/base/base.css" type="text/css">
-  <style type="text/css" media="screen">
-  form div{
-        overflow:hidden;
-      }
-      label{
-        float:left;
-        width:5em;
-      }
-      form div{
-        padding-top:.5em;
-      }
-  #suggest{
-  background:#3c3;
-  padding:.5em;
-  -moz-border-radius:5px;
-  margin:5px 0;
-  }
-  legend{
-  padding:.5em 0;
-  font-weight:bold;
-  color:#363;
-  }
-  pre{
-  border:1px solid #999;
-  padding:5px;
-  background:#eee;
-  }
-  a{color:#369}
-  #ft p{
-  margin:2em 0;
-  color:#000;
-  font-size:90%;
-  }  
-  h1,h2,h3{
-    font-family:Calibri,sans-serif;
-  }
-  h1{
-    font-size:200%;
-    margin:0 0 10px 0;
-    color:#fff;
-  }
-  #ft a{
-    color:#9cf;
-  }
-  html,body{
-    background:#666;
-  }
-  #demos li{
-    padding:.2em 0;
-  }
-  #bd{background:#fff;border:1em solid #fff;}
-#nav li{
-  list-style:none;
-}
-#nav li a {
-  background:#369;
-  color:#fff;
-  padding:.2em 1em;
-  display:block;
-  text-decoration:none;
-  -moz-border-radius:5px;
-  margin:.5em 0;
-  color:#fff;
-}
-#nav li a:hover {
-  background:#69c;
-}
-  </style>
+  <link rel="stylesheet" href="style.css" type="text/css">
+
 </head>
 <body>
 <div id="doc" class="yui-t7">
@@ -87,14 +21,15 @@
 
            <ul id="demos">
              <?php
+
                $demos = array('suggestion'=>'Provide a location suggestion based on IP','searchbutton'=>'Provide a button to get data','postcode'=>'Lookup from postcode');
                foreach(array_keys($demos) as $d){
-                 if($_GET['demo']===$d){
+                 if(isset($_GET['demo'])&&$_GET['demo']===$d){
                    echo '<li><strong>'.$demos[$d].'</strong></li>';
                  } else {
                    echo '<li><a href="index.php?demo='.$d.'">'.$demos[$d].'</a></li>';
                  }
-               }
+              } 
 
 
              ?>
@@ -225,6 +160,7 @@ geofill.lookup(
 </div>
 <script type="text/javascript" src="geofill.js"></script>
 <?php
+if(isset($file))
 echo '<script type="text/javascript" charset="utf-8" src="'.$file.'">';
 echo '</script>';
 ?>
